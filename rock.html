@@ -1,0 +1,202 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #player-message {
+        color: green;
+      }
+      #computermesg {
+        color: orangered;
+      }
+      #playerscore {
+        color: aqua;
+      }
+      #computerscore {
+        color: blue;
+      }
+      #result {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="Rocker()" id="rock">Rock</button>
+    <button onclick="Scissor()" id="scissor">Scissor</button>
+    <button onclick="Peper()" id="peper">Peper</button>
+
+    <h1 id="player-message">0</h1>
+    <h1 id="computermesg">0</h1>
+    <h1 id="playerscore">0</h1>
+    <h1 id="computerscore">0</h1>
+    <h1 id="result"></h1>
+
+    <script>
+      let rockbtn = document.getElementById("rock");
+      let scissorbtn = document.getElementById("scissor");
+      let peperbtn = document.getElementById("peper")
+      let toss = ["Rock", "Scissor", "Peper"];
+      let playermsg = document.getElementById("player-message");
+      let computermesg = document.getElementById("computermesg");
+      let playersrc = document.getElementById("playerscore");
+      let computerscr = document.getElementById("computerscore");
+      let result = document.getElementById("result");
+      let playerscore = 0;
+      let computerscore = 0;
+
+      function Rocker() {
+        let player = rockbtn.innerHTML;
+        playermsg.innerHTML = "player-Selected:" + player;
+        console.log(player);
+        var computer = toss[Math.floor(Math.random() * 3)];
+        console.log(computer, "computer");
+        computermesg.innerHTML = "ComputerSelected:" + computer;
+
+        if (player == "Rock") {
+          if (computer == "Scissor") {
+            playerscore++;
+            playersrc.innerHTML = "player-Score" + "  &nbsp" + playerscore;
+            result.innerHTML = "Player is win";
+          } else if (computer == "Rock") {
+            result.innerHTML = "Game Draw";
+          } else {
+            computerscore++;
+            computerscr.innerHTML = "computer-selected:" + computerscore;
+            result.innerHTML = "computer win";
+          }
+        }
+      }
+
+      function Scissor() {
+        let player = scissorbtn.innerHTML;
+        playermsg.innerHTML = "player-Selected:" + player;
+        console.log(player);
+        var computer = toss[Math.floor(Math.random() * 3)];
+        console.log(computer, "computer");
+        computermesg.innerHTML = "ComputerSelected:" + computer;
+
+        if (player == "Scissor") {
+          if (computer == "Peper") {
+            playerscore++;
+            playersrc.innerHTML = "player-Score" + "  &nbsp" + playerscore;
+            result.innerHTML = "player win";
+          } else if (computer == "Scissor") {
+            result.innerHTML = "drwan the game";
+          } else {
+            computerscore++;
+            computerscr.innerHTML = "computer-selected:" + computerscore;
+            result.innerHTML = "computer win";
+          }
+        }
+      }
+
+
+
+
+        function Peper() {
+          let player = peperbtn.innerHTML;
+          playermsg.innerHTML = "player-Selected:" + player;
+        var computer = toss[Math.floor(Math.random() * 3)];
+        computermesg.innerHTML = "ComputerSelected:" + computer;
+
+
+        }
+
+    </script>
+  </body>
+</html> -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors</title>
+    <style>
+      #player-message {
+        color: green;
+      }
+      #computermesg {
+        color: orangered;
+      }
+      #playerscore {
+        color: aqua;
+      }
+      #computerscore {
+        color: blue;
+      }
+      #result {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="selectOption('rock')">Rock</button>
+    <button onclick="selectOption('scissors')">Scissors</button>
+    <button onclick="selectOption('paper')">Paper</button>
+
+    <h1 id="player-message">0</h1>
+    <h1 id="computermesg">0</h1>
+    <h1 id="playerscore">0</h1>
+    <h1 id="computerscore">0</h1>
+    <h1 id="result"></h1>
+
+    <script>
+      let playerOptions = ["rock", "scissors", "paper"];
+      let playerMessage = document.getElementById("player-message");
+      let computerMessage = document.getElementById("computermesg");
+      let playerScore = document.getElementById("playerscore");
+      let computerScore = document.getElementById("computerscore");
+      let result = document.getElementById("result");
+      let playerScoreCount = 0;
+      let computerScoreCount = 0;
+
+      function selectOption(playerChoice) {
+        playerMessage.innerHTML = "Player Selected: " + playerChoice;
+        
+        let computerChoice = computerSelection();
+        computerMessage.innerHTML = "Computer Selected: " + computerChoice;
+
+        let winner = getWinner(playerChoice, computerChoice);
+        updateScore(winner);
+        result.innerHTML = winner === "draw" ? "It's a Draw!" : "The " + winner + " wins!";
+      }
+
+      function computerSelection() {
+        let randomIndex = Math.floor(Math.random() * playerOptions.length);
+        return playerOptions[randomIndex];
+      }
+
+      function getWinner(playerChoice, computerChoice) {
+        if (playerChoice === computerChoice) {
+          return "draw";
+        } else if (
+          (playerChoice === "rock" && computerChoice === "scissors") ||
+          (playerChoice === "scissors" && computerChoice === "paper") ||
+          (playerChoice === "paper" && computerChoice === "rock")
+        ) {
+          return "player";
+        } else {
+          return "computer";
+        }
+      }
+
+      function updateScore(winner) {
+        if (winner === "player") {
+          playerScoreCount++;
+          playerScore.innerHTML = "Player Score: " + playerScoreCount;
+        } else if (winner === "computer") {
+          computerScoreCount++;
+          computerScore.innerHTML = "Computer Score: " + computerScoreCount;
+        }
+      }
+    </script>
+  </body>
+</html>
